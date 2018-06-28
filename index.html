@@ -9,8 +9,8 @@
     <!-- google font link -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,800" rel="stylesheet" />
 
-    <!-- Font Awesome Glyphicons -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <!-- Font Awesome Glyphicons
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"> -->
 
     <!-- reset -->
     <link rel="stylesheet"  type="text/css" href="assets/css/reset.css">
@@ -25,6 +25,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <!-- end bootstrap links -->
+
+    <!-- Moment JS -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <!-- end Moment JS -->
 
     <!-- custom theme -->
     <link rel="stylesheet" type="text/css" title="customtheme" href="assets/css/customtheme.css">
@@ -96,7 +100,8 @@
                         <label for="train-start-time">
                             First Train Time
                         </label>
-                        <input type="time" class="form-control" name="train-start-time" id="train-start-time" required="required" /> <!-- TODO- Make Sure Military Time -->
+                        <input type="time" class="form-control" name="train-start-time" id="train-start-time" required="required" />
+                        <!-- note- value of this field will always be in military time, but different browsers display the user's choices differently, so I have omitted the format instructions since they would have to vary by browser -->
                     </div>
 
                     <div class="form-group">
