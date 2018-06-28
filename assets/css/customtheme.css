@@ -17,7 +17,6 @@ input
 button,
 div,
 form,
-input,
 header{
     margin-top: 10px;
     margin-bottom: 10px;
@@ -39,6 +38,14 @@ h2{
     font-family: 'Raleway', Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 400;
     margin-top: 0;
+}
+
+h3{
+    color: #061283;
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Raleway', Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
 }
 
 a:link, a:visited {
