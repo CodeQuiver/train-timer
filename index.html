@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NexTrain</title>
+
     <!-- google font link -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,800" rel="stylesheet" />
 
-    <title>NexTrain</title>
+    <!-- Font Awesome Glyphicons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
     <!-- reset -->
     <link rel="stylesheet"  type="text/css" href="assets/css/reset.css">
@@ -28,11 +31,46 @@
     <!-- end custom theme -->
 </head>
 <body>
-    <div class="container-fluid">
-        <header class="row">
+    <div class="container-fluid"> <!-- contains entire page -->
+        
+        <!-- HEADER -->
+        <div class="row">
+            <header class="col-md-12 page-header">
+                <h1>NextTrain</h1>
+                <h2>Tracking everything from the Midnight Train to the A-Train.</h2>
+            </header>
+        </div>
+        <!-- END HEADER -->
 
+        <!-- MAIN SECTION -->
+        <div class="row p-3">
 
-        </header>
+            <!-- Train Timetables -->
+            <div class="col-md-9 border border-secondary rounded">
+
+            </div>
+            <!-- END Train Timetables -->
+
+            <!-- FORM - NEW TRAIN QUERY -->
+            <div class="col-md border border-secondary rounded ml-3">
+                <form id="new-topic-form" role="form">
+                    <h2>Add a Train</h2>
+                    <div class="form-group">
+                        <label for="new-train-input">
+                            Train Name:
+                        </label>
+                        <input class="form-control" id="new-train-input" type="text" />
+                    </div>
+                    
+                    <!-- Button triggers new train to be added -->
+                    <input class="btn btn-sm btn-info" id="add-topic" type="submit" value="Add a Train" />                    
+                </form>
+            </div>
+            <!-- END FORM - NEW TRAIN QUERY -->
+                
+        </div>
+        <!-- END MAIN SECTION -->
+
     </div>
 </body>
 </html>
