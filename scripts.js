@@ -31,11 +31,17 @@ firebase.initializeApp(config);
     // END CLEAR FORM FUNCTION
 
     // CALC NEXT TRAIN FUNCTION
+    function calcNextTrain(calcStart, calcFreq) {
+        // moment.js code here
+    }
         // receives the train's start time and frequency as arguments
         // calculates next train time using moment.js
     // END CALC NEXT TRAIN FUNCTION
 
     // CALC MINUTES TO ARRIVAL
+    function calcMinutes(calcStart, calcFreq) {
+        
+    }
     // END CALC MINUTES TO ARRIVAL
 
     // NEW TRAIN FUNCTION
@@ -88,11 +94,14 @@ firebase.initializeApp(config);
             
             // pass argument to and call calculation function for "Next Train Time"
             // save result in variable
+            loopArrival = calcNextTrain(loopStart, loopFreq);
             
             // pass argument to and call calculation function for "Minutes until Arrival"
             // save result in variable
+            loopMinutes = calcMinutes(loopStart, loopFreq);
 
             // call "PRINT ROW" function and pass all arguments
+            printTableRow(loopName, loopDest, loopFreq, loopArrival, loopMinutes);
             
         }
            
@@ -133,7 +142,9 @@ firebase.initializeApp(config);
 
 //===================== CODE BODY ========================//
     // listener for new child being added to firebase
-    dataRef.ref().on("child_added", fireBaseFetch(snapshot));
+    dataRef.ref().on("child_added", fireBaseFetch(snapshot), function(errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+      });
 
     // call page load function
     // on click update page, calls page load function
