@@ -40,21 +40,22 @@ firebase.initializeApp(config);
 
         // Difference between the times
         var diffTime = moment().diff(moment(startTimeConverted), "minutes");
-        console.log("DIFFERENCE IN TIME: " + diffTime);
+        // console.log("DIFFERENCE IN TIME: " + diffTime);
 
         // Time apart (remainder)
         var tRemainder = diffTime % calcFreq;
-        console.log(tRemainder);
+        // console.log(tRemainder);
 
         // Minutes Until Train
         var tMinutesTillTrain = calcFreq - tRemainder;
-        console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+        // console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
         // Next Train
         var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-        console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+        // console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
-        return { nextTrain: nextTrain, tMinutesTillTrain: tMinutesTillTrain };
+            // note that the moment conversion to correct time format has to be done here
+        return { nextTrain: moment(nextTrain).format("hh:mm"), tMinutesTillTrain: tMinutesTillTrain };
     }
     // END CALC NEXT TRAIN FUNCTION
 
@@ -88,23 +89,37 @@ firebase.initializeApp(config);
       });
 
       clearForm("#new-train-form");
+      loopThroughTrains(trainList);
     });
         // NOTE- Tested successfully
     // END NEW TRAIN FUNCTION
 
-    // FIREBASE FETCHING FUNCTION
-    function fireBaseFetch(childSnapshot) {
-        trainList.push(childSnapshot.val()); // Push children to local trainList array
+    // FIREBASE FETCHING FUNCTION EVENT
+    // listener for new child being added to firebase
+    dataRef.ref().on("child_added", function(childSnapshot) {
+        trainList.push(childSnapshot.val()); // Push children to trainList array
+    }, function(errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+        });
 
+    // Function for iterating through the values
+    function loopThroughTrains(trainList) {
         // for each in array
         for (let i = 0; i < trainList.length; i++) {
             const loopTrain = trainList[i];
 
+            // console.log(loopTrain);
+
             // save basic info in variable
-            loopName = loopTrain.val().name;
-            loopDest = loopTrain.val().destination;
-            loopStart = loopTrain.val().start;
-            loopFreq = loopTrain.val().frequency;
+            loopName = loopTrain.name;
+            loopDest = loopTrain.destination;
+            loopStart = loopTrain.start;
+            loopFreq = loopTrain.frequency;
+
+            // console.log(loopName);
+            // console.log(loopDest);
+            // console.log(loopStart);
+            // console.log(loopFreq);
             
             // pass argument to and call calculation function for "Next Train Time" and "Minutes until Arrival"
             // save results in variables
@@ -115,12 +130,15 @@ firebase.initializeApp(config);
             //console log to check
             console.log("Next Train Time" + i + ": " + loopArrival + " Minutes until next Train" + i + ": " + loopMinutes);
 
-            // call "PRINT ROW" function and pass all arguments
+            // // call "PRINT ROW" function and pass all arguments
             printTableRow(loopName, loopDest, loopFreq, loopArrival, loopMinutes);
             
-        }
-           
-    };
+        }; //end for loop
+    }
+
+
+
+
     // END FIREBASE FETCHING FUNCTION
 
 
@@ -156,10 +174,9 @@ firebase.initializeApp(config);
 //===================== END FUNCTIONS ========================//
 
 //===================== CODE BODY ========================//
-    // listener for new child being added to firebase
-    dataRef.ref().on("child_added", fireBaseFetch(snapshot), function(errorObject) {
-        console.log("Errors handled: " + errorObject.code);
-      });
+
+loopThroughTrains(trainList);
+    
 
     // call page load function
     // on click update page, calls page load function
