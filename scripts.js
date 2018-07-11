@@ -18,6 +18,8 @@ firebase.initializeApp(config);
     // Get a reference to the database service
     var dataRef = firebase.database();
 
+    var trainList = []; //local array to hold all train data pulled from firebase
+
 
 //===================== END GLOBAL VARIABLES ========================//
 
@@ -27,6 +29,14 @@ firebase.initializeApp(config);
         document.getElementById(formName).reset();
     }
     // END CLEAR FORM FUNCTION
+
+    // CALC NEXT TRAIN FUNCTION
+        // receives the train's start time and frequency as arguments
+        // calculates next train time using moment.js
+    // END CALC NEXT TRAIN FUNCTION
+
+    // CALC MINUTES TO ARRIVAL
+    // END CALC MINUTES TO ARRIVAL
 
     // NEW TRAIN FUNCTION
         // on click of submit button #add-train
@@ -63,22 +73,33 @@ firebase.initializeApp(config);
     // END NEW TRAIN FUNCTION
 
     // FIREBASE FETCHING FUNCTION
-        // retrieve all train listings from firebase
-        // for each
+    function fireBaseFetch(childSnapshot) {
+        trainList.push(childSnapshot.val()); // Push children to local trainList array
+
+        // for each in array
+        for (let i = 0; i < trainList.length; i++) {
+            const loopTrain = trainList[i];
+
+            // save basic info in variable
+            loopName = loopTrain.val().name;
+            loopDest = loopTrain.val().destination;
+            loopStart = loopTrain.val().start;
+            loopFreq = loopTrain.val().frequency;
+            
             // pass argument to and call calculation function for "Next Train Time"
-                // save result in variable
-            // pass argument to and call calulation function for "Minutes until Arrival"
-                // save result in variable
+            // save result in variable
+            
+            // pass argument to and call calculation function for "Minutes until Arrival"
+            // save result in variable
+
             // call "PRINT ROW" function and pass all arguments
+            
+        }
+           
+    };
     // END FIREBASE FETCHING FUNCTION
 
-    // CALC NEXT TRAIN FUNCTION
-        // receives the train's start time and frequency as arguments
-        // calculates next train time using moment.js
-    // END CALC NEXT TRAIN FUNCTION
 
-    // CALC MINUTES TO ARRIVAL
-    // END CALC MINUTES TO ARRIVAL
 
     // PRINT TABLE ROW
     function printTableRow(thisTrain, thisDestination, thisFreq, thisArrival, thisMinutes) {
@@ -105,14 +126,18 @@ firebase.initializeApp(config);
 
 
     //PAGE LOAD MASTER FUNCTION
-        //Calls all necessary functions when it itself is called on page load
+        //Calls all necessary functions when it itself is called on page load?
     //END PAGE LOAD MASTER FUNCTION
 
 //===================== END FUNCTIONS ========================//
 
 //===================== CODE BODY ========================//
+    // listener for new child being added to firebase
+    dataRef.ref().on("child_added", fireBaseFetch(snapshot));
+
     // call page load function
     // on click update page, calls page load function
+    
 //===================== END CODE BODY ========================//
 
 //TEST CODE AREA
