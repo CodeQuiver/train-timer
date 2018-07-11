@@ -1,16 +1,17 @@
 // NextTrain train-timer app
 
 // Initialize Firebase
-    // This is the code we copied and pasted from our app page
-    var config = {
-        apiKey: "AIzaSyAJS4YQWU5DmESeYueG1qH1NGkjv3DncEY",
-        authDomain: "fir-click-counter-7cdb9.firebaseapp.com",
-        databaseURL: "https://fir-click-counter-7cdb9.firebaseio.com",
-        storageBucket: "fir-click-counter-7cdb9.appspot.com"
-      };
-  
-      firebase.initializeApp(config);
-  
+var config = {
+apiKey: "AIzaSyC6_p8Rvp7K1Wd7CVxl0xNGihc6i6xbpDA",
+authDomain: "train-timer-df5de.firebaseapp.com",
+databaseURL: "https://train-timer-df5de.firebaseio.com",
+projectId: "train-timer-df5de",
+storageBucket: "",
+messagingSenderId: "511274681299"
+};
+
+firebase.initializeApp(config);
+// End Initialize Firebase
 
 //===================== GLOBAL VARIABLES ========================//
 
