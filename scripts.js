@@ -89,7 +89,6 @@ firebase.initializeApp(config);
       });
 
       clearForm("#new-train-form");
-      loopThroughTrains(trainList);
     });
         // NOTE- Tested successfully
     // END NEW TRAIN FUNCTION
@@ -98,13 +97,7 @@ firebase.initializeApp(config);
     // listener for new child being added to firebase
     dataRef.ref().on("child_added", function(childSnapshot) {
         trainList.push(childSnapshot.val()); // Push children to trainList array
-        console.log(trainList);
-    }, function(errorObject) {
-        console.log("Errors handled: " + errorObject.code);
-        });
 
-    // Function for iterating through the values
-    function loopThroughTrains(trainList) {
         // for each in array
         for (let i = 0; i < trainList.length; i++) {
             const loopTrain = trainList[i];
@@ -135,10 +128,10 @@ firebase.initializeApp(config);
             printTableRow(loopName, loopDest, loopFreq, loopArrival, loopMinutes);
             
         }; //end for loop
-    }
 
-
-
+    }, function(errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+        });
 
     // END FIREBASE FETCHING FUNCTION
 
@@ -176,7 +169,7 @@ firebase.initializeApp(config);
 
 //===================== CODE BODY ========================//
 
-loopThroughTrains(trainList);
+
     
 
     // call page load function
