@@ -18,12 +18,9 @@ firebase.initializeApp(config);
     // Get a reference to the database service
     var dataRef = firebase.database();
 
-    var trainList = []; //local array to hold all train data pulled from firebase
-
-
 //===================== END GLOBAL VARIABLES ========================//
 
-//===================== FUNCTIONS ========================//
+//===================== FUNCTIONS AND EVENTS ========================//
     // CLEAR FORM FUNCTION- resets entire form's inputs without having to specify each field, just pass it id for entire form
     function clearForm(formName) {
         document.getElementById(formName).reset();
@@ -96,19 +93,12 @@ firebase.initializeApp(config);
     // FIREBASE FETCHING FUNCTION EVENT
     // listener for new child being added to firebase
     dataRef.ref().on("child_added", function(childSnapshot) {
-        trainList.push(childSnapshot.val()); // Push children to trainList array
-
-        // for each in array
-        for (let i = 0; i < trainList.length; i++) {
-            const loopTrain = trainList[i];
-
-            // console.log(loopTrain);
 
             // save basic info in variable
-            loopName = loopTrain.name;
-            loopDest = loopTrain.destination;
-            loopStart = loopTrain.start;
-            loopFreq = loopTrain.frequency;
+            loopName = childSnapshot.val().name;
+            loopDest = childSnapshot.val().destination;
+            loopStart = childSnapshot.val().start;
+            loopFreq = childSnapshot.val().frequency;
 
             // console.log(loopName);
             // console.log(loopDest);
@@ -122,12 +112,11 @@ firebase.initializeApp(config);
             loopMinutes = nextTrainResponse.tMinutesTillTrain;
 
             //console log to check
-            console.log("Next Train Time" + i + ": " + loopArrival + " Minutes until next Train" + i + ": " + loopMinutes);
+            console.log("Next Train Time " + loopArrival + " Minutes until next Train: " + loopMinutes);
 
             // // call "PRINT ROW" function and pass all arguments
             printTableRow(loopName, loopDest, loopFreq, loopArrival, loopMinutes);
             
-        }; //end for loop
 
     }, function(errorObject) {
         console.log("Errors handled: " + errorObject.code);
@@ -160,25 +149,13 @@ firebase.initializeApp(config);
 
     // END PRINT TABLE ROW
 
-
-    //PAGE LOAD MASTER FUNCTION
-        //Calls all necessary functions when it itself is called on page load?
-    //END PAGE LOAD MASTER FUNCTION
-
-//===================== END FUNCTIONS ========================//
+//===================== END FUNCTIONS AND EVENTS ========================//
 
 //===================== CODE BODY ========================//
 
-
     
 
-    // call page load function
-    // on click update page, calls page load function
+// no additional code needed here because the events above handle it all
+// may want to re-organize code at later time
     
 //===================== END CODE BODY ========================//
-
-//TEST CODE AREA
-//test function call
-// printTableRow('Midnight Train', 'Chicago', '30', '2:00 PM', '22');
-
-//END TEST CODE AREA
