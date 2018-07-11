@@ -98,6 +98,7 @@ firebase.initializeApp(config);
     // listener for new child being added to firebase
     dataRef.ref().on("child_added", function(childSnapshot) {
         trainList.push(childSnapshot.val()); // Push children to trainList array
+        console.log(trainList);
     }, function(errorObject) {
         console.log("Errors handled: " + errorObject.code);
         });
