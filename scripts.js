@@ -22,17 +22,22 @@ firebase.initializeApp(config);
 //===================== END GLOBAL VARIABLES ========================//
 
 //===================== FUNCTIONS ========================//
+    // CLEAR FORM FUNCTION- resets entire form's inputs without having to specify each field, just pass it id for entire form
+    function clearForm(formName) {
+        document.getElementById(formName).reset();
+    }
+    // END CLEAR FORM FUNCTION
+
     // NEW TRAIN FUNCTION
         // on click of submit button #add-train
         
-    $("#add-train").on("click", function(event) {
-        event.preventDefault();
+    $("#add-train").on("click", function() {     
 
         // initialize local variables
-        name = "";
-        destination = "";
-        start = "";
-        frequency = "";
+        var name = "";
+        var destination = "";
+        var start = "";
+        var frequency = "";
 
         // capture form data in variables
         name = $("#new-train-name").val().trim();
@@ -51,8 +56,10 @@ firebase.initializeApp(config);
         frequency: frequency,
         dateAdded: firebase.database.ServerValue.TIMESTAMP
       });
-    });
 
+      clearForm("#new-train-form");
+    });
+        // NOTE- Tested successfully
     // END NEW TRAIN FUNCTION
 
     // FIREBASE FETCHING FUNCTION
@@ -74,6 +81,10 @@ firebase.initializeApp(config);
     // END CALC MINUTES TO ARRIVAL
 
     // PRINT TABLE ROW
+    function printTableRow(thisTrain, thisDestination, thisFreq, thisArrival, thisMinutes) {
+        
+    }
+
     // END PRINT TABLE ROW
 
 
