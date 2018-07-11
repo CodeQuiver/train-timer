@@ -82,7 +82,23 @@ firebase.initializeApp(config);
 
     // PRINT TABLE ROW
     function printTableRow(thisTrain, thisDestination, thisFreq, thisArrival, thisMinutes) {
-        
+        var thisRow = "No Data";
+
+        // build each data cell
+        nameCell = $("<th scope='row'>").append(thisTrain);
+        destCell = $("<td>").append(thisDestination);
+        freqCell = $("<td>").append(thisFreq);
+        arrCell = $("<td>").append(thisArrival);
+        minCell = $("<td>").append(thisMinutes);
+
+        // append each data cell to thisRow
+        // can append multiple variables $('.div').append(var1, var2, var3)
+        thisRow = $("<tr>");
+        thisRow.append(nameCell, destCell, freqCell, arrCell, minCell);
+
+
+        //append entire row to tbody (or maybe pre-pend so newest added on top)
+        $("#train-list").append(thisRow);
     }
 
     // END PRINT TABLE ROW
@@ -98,3 +114,9 @@ firebase.initializeApp(config);
     // call page load function
     // on click update page, calls page load function
 //===================== END CODE BODY ========================//
+
+//TEST CODE AREA
+//test function call
+// printTableRow('Midnight Train', 'Chicago', '30', '2:00 PM', '22');
+
+//END TEST CODE AREA
